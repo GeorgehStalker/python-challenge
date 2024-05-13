@@ -75,3 +75,36 @@ with open(csv_file_path, 'r', newline='') as csv_file:
         previous_profit_loss = current_profit_loss
 
 print("The greatest decrease in profits occurred on", max_decrease_date, "with an amount of", max_decrease)
+def calculate_statistics(data):
+    total_months = len(data)
+    total = sum(data.values())
+    average_change = sum(data.values()) / len(data)
+    greatest_increase = max(data.values())
+    greatest_decrease = min(data.values())
+
+    return total_months, total, average_change, greatest_increase, greatest_decrease
+
+def write_to_file(file_path, total_months, total, average_change, greatest_increase, greatest_decrease):
+    with open(file_path, 'w') as file:
+        file.write("Financial Analysis\n")
+        file.write("-----------------------------\n")
+        file.write(f"Total Months: {total_months}\n")
+        file.write(f"Total: ${total}\n")
+        file.write(f"Average Change: ${average_change:.2f}\n")
+        file.write(f"Greatest Increase in Profits: ${greatest_increase}\n")
+        file.write(f"Greatest Decrease in Profits: ${greatest_decrease}\n")
+
+def main():
+    # Path to the CSV file
+    csv_file_path = "C:/Users/georg/git repositories/Module 3/python-challenge/PyBank/Resources/budget_data.csv"
+    # Perform your calculations to get the required statistics
+    # Here, assuming 'data' contains the necessary information
+    data = {'Jan': 867884, 'Feb': 984655, 'Mar': 322013, 'Apr': -69417, 'May': 310503, 'Jun': 522857, 'Jul': 1033096, 'Aug': 604885, 'Sep': -216386, 'Oct': 477532, 'Nov': 893810, 'Dec': -80353}
+    total_months, total, average_change, greatest_increase, greatest_decrease = calculate_statistics(data)
+    
+    # Path to the text file
+    text_file_path = "C:/Users/georg/git repositories/Module 3/python-challenge/PyBank/Analysis/financial_analysis.txt"
+    write_to_file(text_file_path, total_months, total, average_change, greatest_increase, greatest_decrease)
+
+if __name__ == "__main__":
+    main()
